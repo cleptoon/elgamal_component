@@ -27,21 +27,10 @@ public class ElgamalController {
     private ElGamalPrivateKey eprik;
     private ElGamalPublicKey epubk;
 
-    public ElgamalController() {
 
-        seed = new BigInteger("0");
-        init();
-    }
-    /*
-     * Recibe como parámetro un número primo grande
-     */
-
-    public ElgamalController(String random_number) {
+    public void init(String random_number) {
+        
         seed = new BigInteger(random_number);
-        init();
-    }
-
-    private void init() {
 
         ekpg = new ElGamalKeyPairGenerator();
         ekpg.initialize(16, new SecureRandom());
@@ -72,7 +61,7 @@ public class ElgamalController {
         encrypt = new ElGamalEncryption();
         encrypt.engineInitEncrypt(epubk);
         String encryptedText = encrypt.engineTextEncrypt(message);
-        System.out.println("Encrpyted Message Text: " + encryptedText);
+        //System.out.println("Encrpyted Message Text: " + encryptedText);
         return encryptedText;
     }
 
@@ -88,7 +77,7 @@ public class ElgamalController {
         String C;
         encrypt.engineInitDecrypt(eprik);
         C = encrypt.engineTextDecrypt(encryptedmsg);
-        System.out.println("Decrypted Text Message: " + C);
+        //System.out.println("Decrypted Text Message: " + C);
         return C;
     }
 
@@ -100,12 +89,11 @@ public class ElgamalController {
         System.out.println("Message : " + str);
         esign.engineUpdate(hash_str.getBytes(), 0, hash_str.length());
         byte[] signedb = esign.engineSign();
-        System.out.println("Signed Message : " + new BigInteger(signedb));
-
+        //System.out.println("Signed Message : " + new BigInteger(signedb));
         return signedb;
     }
 
-    public void signVerify(byte[] signedb, String mensaje) throws InvalidKeyException, SignatureException {
+    public boolean signVerify(byte[] signedb, String mensaje) throws InvalidKeyException, SignatureException {
         String hash_decrypt_str = MD5.md5(mensaje);
         System.out.println("Hashed decrypted message: " + hash_decrypt_str);
         //Verificat mensaje
@@ -113,9 +101,11 @@ public class ElgamalController {
         esign.engineUpdate(hash_decrypt_str.getBytes(), 0, hash_decrypt_str.length());
         boolean veri = esign.engineVerify(signedb);
         if (veri) {
-            System.out.println("Verification Succeeded!");
+            //System.out.println("Verification Succeeded!");
+            return true;
         } else {
-            System.out.println("Verification Failed!");
+            //System.out.println("Verification Failed!");
+            return false;
         }
     }
 }

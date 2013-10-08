@@ -18,7 +18,7 @@ public class Ekeygen {
     static ElGamalEncryption encrypt;
     static ElGamalKeyPairGenerator ekpg;
     static KeyPair epair;
-
+        
     public static void main(String[] args) {
         ElGamalPrivateKey eprik;
         ElGamalPublicKey epubk;
@@ -41,7 +41,7 @@ public class Ekeygen {
             esign = new ElGamalSignature();
             esign.engineInitSign(eprik);
             
-            String hash_str = MD5.md5("Hola mundo");
+            String hash_str = MD5.md5("12345");
             System.out.println("Message : " + str);
             esign.engineUpdate(hash_str.getBytes(), 0, hash_str.length());
             byte[] signedb = esign.engineSign();

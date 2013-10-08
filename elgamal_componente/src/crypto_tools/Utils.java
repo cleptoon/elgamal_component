@@ -3,6 +3,8 @@ package crypto_tools;
 import java.io.IOException;
 import java.math.BigInteger;
 
+//La clase utils se debe pasar al generador de números aleatorios
+
 public class Utils {
 
 	/**
@@ -23,7 +25,7 @@ public class Utils {
 	}
 
 	public static boolean isPrime(BigInteger n) {
-		return n.isProbablePrime(Consts.CERTAINTY);
+		return n.isProbablePrime(100);
 	}
 
 }

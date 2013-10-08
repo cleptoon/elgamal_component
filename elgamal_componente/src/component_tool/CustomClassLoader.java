@@ -69,15 +69,15 @@ public class CustomClassLoader extends ClassLoader {
      * @param name
      *            Full class name
      */
-    @Override
-    public Class<?> loadClass(String name)
-        throws ClassNotFoundException {
-        System.out.println("loading class '" + name + "'");
-        if (name.startsWith("javablogging.")) {
-            return getClass(name);
-        }
-        return super.loadClass(name);
-    }
+//    @Override
+//    public Class<?> loadClass(String name)
+//        throws ClassNotFoundException {
+//        System.out.println("loading class '" + name + "'");
+//        if (name.startsWith("javablogging.")) {
+//            return getClass(name);
+//        }
+//        return super.loadClass(name);
+//    }
 
     /**
      * Loads a given file (presumably .class) into a byte array.
